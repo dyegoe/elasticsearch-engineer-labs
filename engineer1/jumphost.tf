@@ -129,6 +129,7 @@ data "template_file" "jumphost" {
     hosts_b64           = base64encode(data.template_file.hosts.rendered)
     ssh_private_key_b64 = base64encode(file("${path.module}/templates/id_rsa"))
     ssh_config          = base64encode(file("${path.module}/templates/ssh_config"))
+    nginx_kibana        = base64encode(file("${path.module}/templates/nginx_kibana.conf"))
   }
 }
 
