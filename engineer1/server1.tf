@@ -19,7 +19,7 @@ resource "aws_instance" "server1" {
   root_block_device {
     delete_on_termination = true
     encrypted             = false
-    volume_size           = 8
+    volume_size           = 20
     volume_type           = "gp2"
   }
   volume_tags = merge(
