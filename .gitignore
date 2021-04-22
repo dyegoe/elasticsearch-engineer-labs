@@ -1,0 +1,18 @@
+#  Local .terraform directories
+**/.terraform/*
+.terraform*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# .tfvars files
+*.tfvars
+!*.auto.tfvars
+
+# .plan files
+*.plan
+*.tfplan
+
+# ssh key files
+**/id_rsa

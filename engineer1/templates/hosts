@@ -1,0 +1,6 @@
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost6 localhost6.localdomain6
+${jumphost_private_ip} jumphost
+${server1_private_ip} server1
+${server2_private_ip} server2
+${server3_private_ip} server3

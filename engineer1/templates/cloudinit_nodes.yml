@@ -1,0 +1,22 @@
+#cloud-config
+packages:
+  - jq
+runcmd:
+  - sed -r -i '/^preserve_hostname:.*/d' /etc/cloud/cloud.cfg
+  - "echo 'preserve_hostname: true' >> /etc/cloud/cloud.cfg"
+  - hostnamectl set-hostname ${hostname}.localdomain
+  - echo ${hosts_b64} | base64 -d > /etc/hosts
+  - chown root:root /etc/hosts
+  - chmod 0644 /etc/hosts
+  - echo ${ssh_private_key_b64} | base64 -d > /root/.ssh/id_rsa
+  - chown root:root /root/.ssh/id_rsa
+  - chmod 0400 /root/.ssh/id_rsa
+  - echo ${ssh_private_key_b64} | base64 -d > /home/ec2-user/.ssh/id_rsa
+  - chown ec2-user:ec2-user /home/ec2-user/.ssh/id_rsa
+  - chmod 0400 /home/ec2-user/.ssh/id_rsa
+  - cd /home/ec2-user
+  - sudo -u ec2-user curl -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.12.0-linux-x86_64.tar.gz
+  - sudo -u ec2-user curl -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.12.0-linux-x86_64.tar.gz
+  - sudo -u ec2-user curl -O https://artifacts.elastic.co/downloads/kibana/kibana-7.12.0-linux-x86_64.tar.gz
+  - sudo -u ec2-user curl -O https://artifacts.elastic.co/downloads/logstash/logstash-7.12.0-linux-x86_64.tar.gz
+  - reboot

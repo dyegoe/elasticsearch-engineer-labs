@@ -1,0 +1,19 @@
+#cloud-config
+packages:
+  - jq
+runcmd:
+  - echo ${hosts_b64} | base64 -d > /etc/hosts
+  - chown root:root /etc/hosts
+  - chmod 0644 /etc/hosts
+  - echo ${ssh_config} | base64 -d > /root/.ssh/config
+  - chown root:root /root/.ssh/config
+  - chmod 0644 /root/.ssh/config
+  - echo ${ssh_private_key_b64} | base64 -d > /root/.ssh/id_rsa
+  - chown root:root /root/.ssh/id_rsa
+  - chmod 0400 /root/.ssh/id_rsa
+  - echo ${ssh_config} | base64 -d > /home/ec2-user/.ssh/config
+  - chown ec2-user:ec2-user /home/ec2-user/.ssh/config
+  - chmod 0644 /home/ec2-user/.ssh/config
+  - echo ${ssh_private_key_b64} | base64 -d > /home/ec2-user/.ssh/id_rsa
+  - chown ec2-user:ec2-user /home/ec2-user/.ssh/id_rsa
+  - chmod 0400 /home/ec2-user/.ssh/id_rsa
